@@ -44,11 +44,15 @@ exports.handler = async (event, context) => {
     const collection = database.collection(colName);
 
     // Convert the document ID to a MongoDB ObjectId
-    const { ObjectId } = require("mongodb");
-    const query = { _id: new ObjectId(documentId) };
+    // const { ObjectId } = require("mongodb");
+    // const query = { _id: new ObjectId(documentId) };
+
+    const packageQuery = { package_name: documentId };
+
+    console.log(packageQuery);
 
     // Fetch the document by ID
-    const document = await collection.findOne(query);
+    const document = await collection.findOne(packageQuery);
 
     if (!document) {
       return {

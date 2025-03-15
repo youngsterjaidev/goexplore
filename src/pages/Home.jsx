@@ -1,9 +1,25 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import Slideshow from "../components/SlideShow";
+import { useNavigate } from "react-router-dom";
 
 const BannerSection = () => {
   const [packages, setPackages] = useState(dummyData);
+  const navigate = useNavigate();
+
+  const fetchPackages = async () => {
+    try {
+      const res = await fetch("/.netlify/functions/packages");
+      const data = await res.json();
+      setPackages(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchPackages();
+  }, []);
 
   return (
     <>
@@ -92,7 +108,10 @@ const BannerSection = () => {
           </h2>
           <div className="flex justify-around gap-[4rem] overflow-x-auto py-[3rem] scrollbar-hide">
             {packages.map((pack) => (
-              <div className="flex flex-[1_0_600px] items-center gap-8 bg-white p-4 rounded-lg border border-gray-200">
+              <div
+                className="cursor-pointer flex flex-[1_0_600px] items-center gap-8 bg-white p-4 rounded-lg border border-gray-200"
+                onClick={() => navigate(`/package/${pack.package_name}`)}
+              >
                 <div
                   style={{
                     background:
@@ -122,49 +141,6 @@ const BannerSection = () => {
   );
 };
 
-const Footer = () => {
-  return (
-    <footer className="bg-white p-[2rem_8rem]">
-      <div className="flex justify-around items-center gap-8">
-        <div>
-          <h2 className="text-blue-400 font-bold text-4xl">Travel</h2>
-          <ul>
-            <li>Home</li>
-            <li>About</li>
-            <li>Destination</li>
-          </ul>
-        </div>
-        <div>
-          <h2 className="text-blue-400 font-bold text-4xl">Contact</h2>
-          <ul>
-            <li>Phone: 123-456-7890</li>
-            <li>
-              Email:
-              <a href="mailto:" className="text-blue-400">
-                info@gmail.com
-              </a>
-            </li>
-            <li>Address: 123, Street Name, City Name</li>
-          </ul>
-        </div>
-        <div>
-          <h2 className="text-blue-400 font-bold text-4xl">Social</h2>
-          <ul>
-            <li>Facebook</li>
-            <li>Twitter</li>
-            <li>Instagram</li>
-          </ul>
-        </div>
-      </div>
-      <div className="py-[3rem] flex justify-center items-center">
-        <p className="text-blue-400 font-bold">
-          © 2025 Travel. All rights reserved.
-        </p>
-      </div>
-    </footer>
-  );
-};
-
 function Home() {
   const [count, setCount] = useState(0);
   const images = [
@@ -175,12 +151,10 @@ function Home() {
 
   return (
     <>
-      <Navbar />
       <BannerSection />
       <div className="mx-auto mt-10">
         <Slideshow images={images} interval={10000} />
       </div>
-      <Footer />
       <div class="snowflake"></div>
       <div class="snowflake"></div>
       <div class="snowflake"></div>
