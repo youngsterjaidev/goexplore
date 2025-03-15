@@ -6,6 +6,7 @@
   "scripts": {
     "n": "netlify dev",
     "v": "vercel dev",
+    "create": "netlify functions:create",
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",

@@ -15,12 +15,7 @@ yarn-error.log
 dist/
 build/
 
-# Netlify CLI state and cache files (non-essential)
-.netlify/state.json
-.netlify/cache/
-
-# Track the .netlify/functions directory (essential)
-!.netlify/functions/
+.netlify/
 
 # IDE and editor files
 .idea/
