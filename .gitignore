@@ -1,0 +1,46 @@
+# Node.js
+node_modules/
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+.pnpm-debug.log
+
+# Environment variables
+.env
+.env.local
+.env.development
+.env.production
+
+# Build directories
+dist/
+build/
+
+# Netlify CLI state and cache files (non-essential)
+.netlify/state.json
+.netlify/cache/
+
+# Track the .netlify/functions directory (essential)
+!.netlify/functions/
+
+# IDE and editor files
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
+
+# Vite cache
+.cache/
+
+# MongoDB local data (if applicable)
+data/db/
